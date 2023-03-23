@@ -115,21 +115,21 @@ v-hammer-recognizer-options
 ```vue
 <!-- 设置 doubletap 事件可以与 tap 事件一起被识别 -->
 <div
-	v-hammer:tap="onTap"
-	v-hammer:doubletap="onDoubleTap"
-	v-hammer-recognizer-options="{
-		event: 'doubletap', recognizeWith: 'tap'
-	}"
+    v-hammer:tap="onTap"
+    v-hammer:doubletap="onDoubleTap"
+    v-hammer-recognizer-options="{
+        event: 'doubletap', recognizeWith: 'tap'
+    }"
 ></div>
 ```
 
 ```vue
 <!-- 设置多个识别器 -->
 <div
-	v-hammer-recognizer-options="[
-		{ type: 'tap', pointers: 2 },
+    v-hammer-recognizer-options="[
+        { type: 'tap', pointers: 2 },
         { type: 'pan', direction: 'DIRECTION_LEFT' }
-	]"
+    ]"
 ></div>
 ```
 
@@ -155,8 +155,8 @@ v-hammer-recognizer-options
 
 ```vue
 <div
-	v-hammer:tripletap="onCustom"
-	v-hammer-recognizer-options="{ type: 'tap', event: 'tripletap', taps: 3 }"
+    v-hammer:tripletap="onCustom"
+    v-hammer-recognizer-options="{ type: 'tap', event: 'tripletap', taps: 3 }"
 ></div>
 ```
 
