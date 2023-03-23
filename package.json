@@ -1,0 +1,22 @@
+{
+  "name": "hammer-vue-plugin",
+  "version": "1.0.0",
+  "description": "Hammer.js plugin for Vue",
+  "author": "ahong <1002363357@qq.com> (https://github.com/ahong)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahong/hammer-vue-plugin.git"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "hammer",
+    "hammerjs",
+    "hammer.js",
+    "touch",
+    "gestures"
+  ],
+  "main": "index.js",
+  "dependencies": {}
+}

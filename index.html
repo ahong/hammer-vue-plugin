@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+    <title>HammerVuePlugin</title>
+    <meta name="keywords" content="Keywords">
+    <meta name="description" content="description">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/hammer.js/2.0.8/hammer.js"></script>
+    <style>
+        .hammer {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 24px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div
+            v-hammer:tap="onTap"
+            v-hammer:pan="onPan"
+            v-hammer-recognizer-options="[
+                { type: 'tap', pointers: 2 },
+                { type: 'pan', direction: 'DIRECTION_LEFT' }
+            ]"
+            class="hammer"
+        ></div>
+        <div
+            v-hammer:tap="onTap"
+            v-hammer:doubletap="onDoubleTap"
+            v-hammer-recognizer-options="{ event: 'doubletap', recognizeWith: 'tap' }"
+            class="hammer"
+        ></div>
+        <div
+            v-hammer:tripletap="onCustom"
+            v-hammer-recognizer-options="{ type: 'tap', event: 'tripletap', taps: 3 }"
+            class="hammer"
+        ></div>
+    </div>
+    <script type="module">
+        import { HammerVuePlugin } from "./index.js";
+        Vue.use(HammerVuePlugin);
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    enable: true
+                };
+            },
+            created() {
+                setTimeout(() => {
+                    console.log('change');
+                    this.enable = false;
+                }, 2000);
+            },
+            methods: {
+                onCustom(event) {
+                    console.log('onCustom', event.type, event);
+                },
+
+                onTap(event) {
+                    console.log('onTap', event.type, event);
+                },
+                onDoubleTap(event) {
+                    console.log('onDoubleTap', event.type, event);
+                },
+                
+                onPan(event) {
+                    console.log('onPan', event.type, event);
+                },
+                onPanStart(event) {
+                    console.log('onPanStart', event.type, event);
+                },
+                onPanMove(event) {
+                    console.log('onPanMove', event.type, event);
+                },
+                onPanEnd(event) {
+                    console.log('onPanEnd', event.type, event);
+                },
+                onPanCancel(event) {
+                    console.log('onPanCancel', event.type, event);
+                },
+                onPanLeft(event) {
+                    console.log('onPanLeft', event.type, event);
+                },
+                onPanRight(event) {
+                    console.log('onPanRight', event.type, event);
+                },
+                onPanUp(event) {
+                    console.log('onPanUp', event.type, event);
+                },
+                onPanDown(event) {
+                    console.log('onPanDown', event.type, event);
+                },
+            
+                onPress(event) {
+                    console.log('onPress', event.type, event);
+                },
+                onPressUp(event) {
+                    console.log('onPressUp', event.type, event);
+                },
+            }
+        });
+    </script>
+</body>
+</html>
