@@ -164,4 +164,5 @@ v-hammer-recognizer-options
 
 ## 可优化点
 
+- Rollup 打包是否有优化空间？
 - 怎么实现 stopPropagation、preventDefault？
