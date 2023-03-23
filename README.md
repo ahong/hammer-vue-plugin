@@ -142,23 +142,26 @@ v-hammer-recognizer-options
 
 说明：
 
-​	doubletap 属于插件内置的自定义事件，在设置 doubletap 识别器的时候需要使用 event 指定。
+- doubletap 属于插件内置的自定义事件，在设置 doubletap 识别器的时候需要使用 event 指定。
+- 如果 recognizeWith、dropRecognizeWith、requireFailure、dropRequireFailure 方法报错，说明无法获取对应的识别器，可以检查是否添加了对应的识别器，或检查指令的绑定顺序是否有问题
 
 
 
 ### 自定义事件
 
-Hammer.js 支持自定义识别器，实现更加丰富的手势。
+> Hammer.js 支持自定义识别器，实现更加丰富的手势。
+
+结合 v-hammer 与 v-hammer-recognizer-options 指令可以实现自定义事件，例如下面演示了自定义三次点击的事件：
 
 ```vue
-<template>
-	<!-- 自定义三次点击的事件 -->
-	<div v-hammer:tripletap="onCustom"></div>
-	<div v-hammer-recognizer-options="{
-		type: 'tap', event: 'tripletap', taps: 3
-	}"></div>
-</template>
+<div
+	v-hammer:tripletap="onCustom"
+	v-hammer-recognizer-options="{ type: 'tap', event: 'tripletap', taps: 3 }"
+></div>
 ```
 
 
 
+## 可优化点
+
+- 怎么实现 stopPropagation、preventDefault？
