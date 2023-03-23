@@ -1,6 +1,8 @@
 /**
  * Vue2自定义指令：https://v2.cn.vuejs.org/v2/guide/custom-directive.html
  */
+import Hammer from "hammerjs";
+
 function captialize(value) {
     if (typeof value !== 'string') {
         value = String(value);
@@ -83,7 +85,7 @@ function setupRecognizer(manager, options) {
     }
 }
 
-export const HammerVuePlugin = {
+export default {
     install(Vue) {
         function recognizerOptionsHandle(el, binding) {
             let ma = el.ma || (el.ma = new Hammer.Manager(el));

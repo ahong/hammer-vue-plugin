@@ -17,6 +17,17 @@
     "touch",
     "gestures"
   ],
-  "main": "index.js",
-  "dependencies": {}
+  "main": "hammer-vue-plugin.js",
+  "scripts": {
+    "rollup": "rollup -c"
+  },
+  "dependencies": {
+    "hammerjs": "^2.0.8"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-terser": "^0.4.0",
+    "rollup": "^3.20.1"
+  }
 }

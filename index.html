@@ -11,6 +11,7 @@
     <meta name="description" content="description">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
     <script src="https://cdn.staticfile.org/hammer.js/2.0.8/hammer.js"></script>
+    <script src="./hammer-vue-plugin.js"></script>
     <style>
         .hammer {
             width: 100px;
@@ -24,18 +25,12 @@
     <div id="app">
         <div
             v-hammer:tap="onTap"
-            v-hammer:pan="onPan"
-            v-hammer-recognizer-options="[
-                { type: 'tap', pointers: 2 },
-                { type: 'pan', direction: 'DIRECTION_LEFT' }
-            ]"
             class="hammer"
         ></div>
     </div>
     <div class="hammer test"></div>
 
-    <script type="module">
-        import { HammerVuePlugin } from "./index.js";
+    <script>
         Vue.use(HammerVuePlugin);
         new Vue({
             el: '#app',
