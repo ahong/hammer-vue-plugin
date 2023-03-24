@@ -1,5 +1,9 @@
 # hammer-vue-plugin
 
+> For Vue2：hammer-vue-plugin@1，见 1.x 分支
+>
+> For Vue3：hammer-vue-plugin@2
+
 [Hammer.js](http://hammerjs.github.io/) 是一个可以识别 touch、mouse 和 pointerEvents 的手势库，而 hammer-vue-plugin 是基于 Hammer.js 实现的 Vue 插件，允许以 Vue 指令的方式快速添加手势监听器。
 
 
@@ -8,6 +12,15 @@
 
 ```bash
 npm i hammer-vue-plugin
+```
+
+```javascript
+import { createApp } from "vue";
+import HammerVuePlugin from "hammer-vue-plugin";
+
+const app = createApp();
+app.use(HammerVuePlugin);
+app.mount('#app');
 ```
 
 
