@@ -10,6 +10,13 @@
 npm i hammer-vue-plugin
 ```
 
+```javascript
+import Vue from "vue";
+import HammerVuePlugin from "hammer-vue-plugin";
+
+Vue.use(HammerVuePlugin);
+```
+
 
 
 ## 接口
