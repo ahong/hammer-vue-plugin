@@ -1,6 +1,6 @@
 {
   "name": "hammer-vue-plugin",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Hammer.js plugin for Vue",
   "author": "ahong <1002363357@qq.com> (https://github.com/ahong)",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "hammerjs": "^2.0.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-terser": "^0.4.0",

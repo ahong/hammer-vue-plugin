@@ -1,8 +1,6 @@
 /**
- * Vue2自定义指令：https://v2.cn.vuejs.org/v2/guide/custom-directive.html
+ * Vue3自定义指令：https://cn.vuejs.org/guide/reusability/custom-directives.html
  */
-import Hammer from "hammerjs";
-
 function captialize(value) {
     if (typeof value !== 'string') {
         value = String(value);
@@ -85,9 +83,22 @@ function setupRecognizer(manager, options) {
     }
 }
 
-export default {
-    install(Vue) {
-        function recognizerOptionsHandle(el, binding) {
+export const HammerVuePlugin = {
+    install(app) {
+        app.directive('hammer-manager-options', {
+            // Hammer.Manager.prototype.set 方法无法设置 cssProps，此配置必须在创建实例时就设置
+            // 所以在 v-hammer 所需的钩子函数之前，需要根据配置项创建好 Manager 实例
+            created(el, binding) {
+                el.ma = new Hammer.Manager(el, binding.value);
+            },
+            beforeUpdate(el, binding) {
+                if (el.ma && binding.value) {
+                    el.ma.set(binding.value);
+                }
+            }
+        });
+
+        app.directive('hammer-recognizer-options', (el, binding) => {
             let ma = el.ma || (el.ma = new Hammer.Manager(el));
             let value = binding.value;
             if (!Array.isArray(value)) {
@@ -100,32 +111,10 @@ export default {
                 let defaultOptions = getRecognizerDefaultOptionsFromEventName(name) || {};
                 setupRecognizer(ma, Object.assign(defaultOptions, options));
             });
-        }
-
-        Vue.directive('hammer-manager-options', {
-            // Hammer.Manager.prototype.set 方法无法设置 cssProps，此配置必须在创建实例时就设置
-            // 所以在 v-hammer 所需的钩子函数之前，需要根据配置项创建好 Manager 实例
-            bind(el, binding) {
-                if (!el.ma) {
-                    el.ma = new Hammer.Manager(el, binding.value);
-                }
-            },
-            update(el, binding) {
-                if (el.ma && binding.value) {
-                    el.ma.set(binding.value);
-                }
-            }
         });
 
-        Vue.directive('hammer-recognizer-options', {
-            // 因为这个指令最好在 v-hammer 之后执行，所以没有使用简写的方式
-            // 指令执行顺序与绑定顺序有关，如果这个指令使用 recognizeWith 等方式涉及到其它识别器，而对应识别器又还没添加时会报错
-            inserted: recognizerOptionsHandle,
-            update: recognizerOptionsHandle
-        });
-
-        Vue.directive('hammer', {
-            inserted(el, binding) {
+        app.directive('hammer', {
+            mounted(el, binding) {
                 let ma = el.ma || (el.ma = new Hammer.Manager(el));
                 let { arg, value } = binding;
 
@@ -148,7 +137,7 @@ export default {
                     ma.on(arg, value);
                 }
             },
-            update(el, binding) {
+            updated(el, binding) {
                 let ma = el.ma || (el.ma = new Hammer.Manager(el));
                 let { arg, value, oldValue } = binding;
 
@@ -162,7 +151,7 @@ export default {
                     }
                 }
             },
-            unbind(el) {
+            unmounted(el) {
                 if (el.ma) {
                     el.ma.destroy();
                     el.ma = null;
